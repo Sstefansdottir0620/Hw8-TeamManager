@@ -99,6 +99,11 @@ switch(generalAnswers.role) {
     case: "Manager"
         inquirer.prompt(managerQuestions);
         break;
-    // case: "Intern"
-    // case: "Employee"
+        case: "Engineer"
+        inquirer.prompt(engineerQuestions);
+        break;
+        case: "Intern"
+        inquirer.prompt(internQuestions);
+        break;
+    
 }
