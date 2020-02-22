@@ -11,29 +11,10 @@ const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
 // Each item in the manager/intern/engineer array will be a new instance of a specific employee class.
-var answers = {
-    manger:[
-        
-    {id:"",
-    name:"",
-    email:"",
-    officeNumber:""}
-],
-    intern:[
-        
-    {id:"",
-    name:"",
-    email:"",
-    school:""},
-],
-    engineer:[
-        
-    {id:"",
-    name:"",
-    email:"",
-    githubURL:""},
-],
-
+var data = {
+    manager:[],
+    intern:[],
+    engineer:[]
 }
 
 // A variable is set for the general questions that are prompted to the user.
@@ -75,7 +56,7 @@ let managerQuestions = [
 let engineerQuestions = [
     {
         type: "input",
-        name: "githubURL",
+        name: "github",
         message: "Please enter the gihub-URL of the engineer :"
     }
 
@@ -89,21 +70,57 @@ let internQuestions = [
     }
 
 ]
-// An initial function is created to promt the questions to user using inquirer.
+
+
 function init() {
     inquirer.prompt(generalQuestions)
-    .then(generalAnswers => {answer})
-}
+    .then(generalAnswers => {
+        switch(generalAnswers.role) {
+            case "Manager":
+                inquirer.prompt(managerQuestions).then(managerAnswer => {
+                    //Data storage here
+                    var manager = new Manager(generalAnswers.id, generalAnswers.name, generalAnswers.email, managerAnswer.officeNumber);
+                    data.manager.push(manager);
+                    confirmAddrole();
+                });
+                break;
+                case "Engineer":
+                inquirer.prompt(engineerQuestions).then(engineerAnswer => {
+                    //Data storage here
+                    var engineer = new Engineer(generalAnswers.id, generalAnswers.name, generalAnswers.email, engineerAnswer.github);
+                    data.engineer.push(engineer);
+                    confirmAddrole();
+                });
+                break;
+                case "Intern":
+                inquirer.prompt(internQuestions).then(internAnswer => {
+                    //Data storage here
+                    var intern = new Intern(generalAnswers.id, generalAnswers.name, generalAnswers.email, internAnswer.school); 
+                    data.intern.push(intern);
+                    confirmAddrole();
+                });
+                break;
+        }
+       
+    })
+};
+// An initial function is created to prompt 
 
-switch(generalAnswers.role) {
-    case: "Manager"
-        inquirer.prompt(managerQuestions);
-        break;
-        case: "Engineer"
-        inquirer.prompt(engineerQuestions);
-        break;
-        case: "Intern"
-        inquirer.prompt(internQuestions);
-        break;
-    
-}
+function confirmAddrole(){
+    console.log(data);
+    inquirer.prompt({
+        type:"list",
+        name: "confirm",
+        message: "Would you like to add an employee?",
+        choices:["YES","NO"]
+    }).then(response => {response.confirm
+    if (response.confirm === "YES") {
+        init();
+    } else {
+        console.log("ok goodbye!");   
+    }
+    })
+};
+
+init();
+
