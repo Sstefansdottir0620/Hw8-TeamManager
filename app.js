@@ -10,7 +10,7 @@ const Engineer = require("./lib/Engineer");
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
 
-// Each item in the manager/intern/engineer array will be a new instance of a specific employee class.
+// Each key in the manager/intern/engineer array will be a new instance of a specific employee class.
 var data = {
     manager:[],
     intern:[],

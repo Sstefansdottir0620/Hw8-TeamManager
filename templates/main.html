@@ -6,37 +6,18 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container"></div>
-    <div class="card">
-        <div class="card-header">
-          <h3><strong>Character Statistics</strong></h3>
-        </div>
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-          <h2 id="name">Yoda</h2>
-          <div id="stats">
-            <h3><strong>Role:</strong> <span id="role">Jedi Master</span></h3>
-            <h3><strong>Age:</strong> <span id="age">900</span></h3>
-            <h3><strong>Force Points:</strong> <span id="force-points">2000</span></h3>
-          </div>
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
-    <script type="text/javascript">
-        // Question: What does this code do?
-        $("#add-btn").on("click", function(event) {
-          event.preventDefault();
-          var newEmployee = {
-            name: $("#name").val().trim(),
-            role: $("#role").val().trim(),
-            age: $("#age").val().trim(),
-            forcePoints: $("#force-points").val().trim()
-          };
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+      </div>
     
-          // Question: What does this code do??
-          $.post("/api/characters", newEmployee)
-            .then(function(data) {
-              console.log("add.html", data);
-              alert("Adding character...");
-            });
-        });
-      </script>
 </body>
 </html>
